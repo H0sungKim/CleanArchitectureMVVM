@@ -12,13 +12,18 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var countTextField: UITextField!
     
-    private var catViewModel: CatViewModel! = CatViewModel(catUseCase: CatUseCaseImpl(catRepository: CatRepositoryImpl(catService: CatServiceImpl())))
     private var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
+    
+    private var catViewModel: CatViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         bind(catViewModel: catViewModel)
+    }
+    
+    func inject(catViewModel: CatViewModel) {
+        self.catViewModel = catViewModel
     }
     
     private func bind(catViewModel: CatViewModel) {

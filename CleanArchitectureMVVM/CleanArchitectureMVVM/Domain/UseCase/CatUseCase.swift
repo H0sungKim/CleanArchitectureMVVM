@@ -22,6 +22,5 @@ class CatUseCaseImpl: CatUseCase {
     
     func fetchCats(count: Int) -> AnyPublisher<[CatEntity], MoyaError> {
         return catRepository.fetchCats(count: count)
-            .manageThread()
     }
 }

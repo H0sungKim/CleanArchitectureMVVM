@@ -29,6 +29,7 @@ class CatViewModel: CatViewModelInput, CatViewModelOutput {
     
     func addCat(count: Int) {
         catUseCase.fetchCats(count: count)
+            .manageThread()
             .sinkHandledCompletion(receiveValue: { [weak self] catEntities in
                 self?.cats.append(contentsOf: catEntities)
             })
