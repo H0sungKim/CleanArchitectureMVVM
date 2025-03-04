@@ -58,7 +58,18 @@ struct CatResponseDTO: Codable {
 extension CatResponseDTO {
     var entity: CatEntity {
         get {
-            return CatEntity(catResponseDTO: self)
+            return CatEntity(
+                imageUrl: URL(string: self.url ?? ""),
+                size: {
+                    guard let width = self.width, let height = self.height else {
+                        return .zero
+                    }
+                    return CGSize(width: width, height: height)
+                }(),
+                species: self.breeds?.first?.name ?? "",
+                features: self.breeds?.first?.temperament ?? "",
+                wikipedia: URL(string: self.breeds?.first?.wikipedia_url ?? "")
+            )
         }
     }
 }

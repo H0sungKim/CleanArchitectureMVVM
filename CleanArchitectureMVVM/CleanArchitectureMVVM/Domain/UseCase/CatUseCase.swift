@@ -13,7 +13,7 @@ protocol CatUseCase {
     func fetchCats(count: Int) -> AnyPublisher<[CatEntity], MoyaError>
 }
 
-class CatUseCaseImpl: CatUseCase {
+class DefaultCatUseCase: CatUseCase {
     let catRepository: CatRepository
     
     init(catRepository: CatRepository) {

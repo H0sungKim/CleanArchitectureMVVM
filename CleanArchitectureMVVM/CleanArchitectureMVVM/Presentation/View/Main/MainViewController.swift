@@ -10,6 +10,7 @@ import Combine
 
 class MainViewController: UIViewController {
     
+    @IBOutlet weak var catTableView: UITableView!
     @IBOutlet weak var countTextField: UITextField!
     
     private var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
@@ -27,7 +28,7 @@ class MainViewController: UIViewController {
     }
     
     private func bind(catViewModel: CatViewModel) {
-        catViewModel.$cats.sink(receiveValue: { catEntities in
+        catViewModel.catsPublisher.sink(receiveValue: { catEntities in
             print(catEntities)
         })
         .store(in: &cancellable)

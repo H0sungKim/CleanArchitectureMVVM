@@ -14,7 +14,7 @@ protocol CatService {
     func fetchCats(count: Int) -> AnyPublisher<[CatResponseDTO], MoyaError>
 }
 
-class CatServiceImpl: CatService {
+class DefaultCatService: CatService {
     private let provider = MoyaProvider<CatAPI>()
     
     func fetchCats(count: Int) -> AnyPublisher<[CatResponseDTO], MoyaError> {

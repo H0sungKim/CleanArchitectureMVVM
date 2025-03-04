@@ -13,14 +13,21 @@ protocol CatViewModelInput {
     func deleteCat(index: Int)
 }
 
-protocol CatViewModelOutput: ObservableObject {
+protocol CatViewModelOutput {
     var cats: [CatEntity] { get }
+    var catsPublished: Published<[CatEntity]> { get }
+    var catsPublisher: Published<[CatEntity]>.Publisher { get }
 }
 
-class CatViewModel: CatViewModelInput, CatViewModelOutput {
+protocol CatViewModel: CatViewModelInput, CatViewModelOutput { }
+
+class DefaultCatViewModel: CatViewModel {
+    @Published private(set) var cats: [CatEntity] = []
+    var catsPublished: Published<[CatEntity]> { _cats }
+    var catsPublisher: Published<[CatEntity]>.Publisher { $cats }
+    
     private var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
     
-    @Published private(set) var cats: [CatEntity] = []
     private let catUseCase: CatUseCase
     
     init(catUseCase: CatUseCase) {
