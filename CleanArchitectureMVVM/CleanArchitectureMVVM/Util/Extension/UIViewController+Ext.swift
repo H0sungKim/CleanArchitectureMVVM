@@ -9,11 +9,14 @@ import UIKit
 
 enum ViewControllerEnum: String, CaseIterable {
     case main
+    case catDetail
     
     var storyboard: String {
         switch self {
         case .main:
             return "Main"
+        case .catDetail:
+            return "CatDetail"
         }
     }
     
@@ -21,6 +24,8 @@ enum ViewControllerEnum: String, CaseIterable {
         switch self {
         case .main:
             return MainViewController.self
+        case .catDetail:
+            return CatDetailViewController.self
         }
     }
 }

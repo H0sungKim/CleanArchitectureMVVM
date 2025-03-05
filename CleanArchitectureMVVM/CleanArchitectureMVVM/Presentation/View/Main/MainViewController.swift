@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var catTableView: UITableView!
     @IBOutlet weak var countTextField: UITextField!
+    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
     private var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
     
@@ -20,9 +21,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
-        catTableView.register(UINib(nibName: String(describing: CatTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: CatTableViewCell.self))
-        catTableView.delegate = self
-        catTableView.dataSource = self
+        configureTableView()
         bind(catViewModel: catViewModel)
     }
     
@@ -31,15 +30,23 @@ class MainViewController: UIViewController {
     }
     
     private func bind(catViewModel: CatViewModel) {
-        catViewModel.cats.sink(receiveValue: {[weak self] catEntities in
+        catViewModel.cats.sink(receiveValue: { [weak self] catEntities in
+            self?.indicatorView.stopAnimating()
             self?.catTableView.reloadData()
-            
         })
         .store(in: &cancellable)
     }
     
+    private func configureTableView() {
+        catTableView.register(UINib(nibName: String(describing: CatTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: CatTableViewCell.self))
+        catTableView.delegate = self
+        catTableView.dataSource = self
+    }
+    
     @IBAction func onClickAddCat(_ sender: Any) {
         guard let text = countTextField.text, let count = Int(text) else { return }
+        countTextField.text = nil
+        indicatorView.startAnimating()
         catViewModel.addCat(count: count)
     }
 }
@@ -59,6 +66,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.configure(catEntity: catViewModel.cats.value[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let catDetailViewController = AppDIProvider.shared.makeCatDetailViewController(index: indexPath.row, catViewModel: catViewModel)
+        navigationController?.pushViewController(catDetailViewController, animated: true)
     }
 }
 

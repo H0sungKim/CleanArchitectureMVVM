@@ -37,6 +37,7 @@ extension CatAPI: TargetType {
             .requestParameters(parameters: [
                 "limit": count,
                 "has_breeds": 1,
+                "api_key": Bundle.main.apiKey ?? ""
             ], encoding: URLEncoding.queryString)
         }
     }

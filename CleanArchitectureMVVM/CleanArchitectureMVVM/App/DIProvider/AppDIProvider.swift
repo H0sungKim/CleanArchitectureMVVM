@@ -10,6 +10,7 @@ import UIKit
 
 protocol ViewControllerFactory {
     func makeMainViewController(catViewModel: CatViewModel?) -> UIViewController
+    func makeCatDetailViewController(index: Int, catViewModel: CatViewModel?) -> UIViewController
 }
 
 class AppDIProvider: ViewControllerFactory {
@@ -29,9 +30,17 @@ class AppDIProvider: ViewControllerFactory {
     func makeMainViewController(catViewModel: CatViewModel? = nil) -> UIViewController {
         let viewController = UIViewController.getViewController(viewControllerEnum: .main)
         if let mainViewController = viewController as? MainViewController {
-            let catViewModel: CatViewModel = catViewModel ?? catDIProvider.makeCatViewModel()
-            mainViewController.inject(catViewModel: catViewModel)
+            mainViewController.inject(catViewModel: catViewModel ?? catDIProvider.makeCatViewModel())
         }
         return viewController
     }
+    
+    func makeCatDetailViewController(index: Int, catViewModel: CatViewModel? = nil) -> UIViewController {
+        let viewController = UIViewController.getViewController(viewControllerEnum: .catDetail)
+        if let catDetailViewController = viewController as? CatDetailViewController {
+            catDetailViewController.inject(index: index, catViewModel: catViewModel ?? catDIProvider.makeCatViewModel())
+        }
+        return viewController
+    }
+    
 }

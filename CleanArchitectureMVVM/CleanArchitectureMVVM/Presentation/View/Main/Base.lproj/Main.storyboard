@@ -36,14 +36,19 @@
                                             <action selector="onClickAddCat:" destination="BYZ-38-t0r" eventType="touchUpInside" id="21J-gd-Fdz"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YdC-7u-gLA">
+                                        <rect key="frame" x="340.33333333333331" y="22" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="aRu-cD-nCu" firstAttribute="centerY" secondItem="YdC-7u-gLA" secondAttribute="centerY" id="6bw-Dg-z5h"/>
                                     <constraint firstItem="Dwm-lQ-evq" firstAttribute="leading" secondItem="uAa-hl-8n6" secondAttribute="leading" constant="16" id="Im2-Z2-U1y"/>
                                     <constraint firstItem="Dwm-lQ-evq" firstAttribute="centerY" secondItem="uAa-hl-8n6" secondAttribute="centerY" id="d9B-BS-Z6d"/>
                                     <constraint firstItem="aRu-cD-nCu" firstAttribute="centerY" secondItem="uAa-hl-8n6" secondAttribute="centerY" id="kRk-wV-wMq"/>
                                     <constraint firstAttribute="trailing" secondItem="aRu-cD-nCu" secondAttribute="trailing" constant="16" id="lmN-sb-JMe"/>
                                     <constraint firstItem="aRu-cD-nCu" firstAttribute="leading" secondItem="Dwm-lQ-evq" secondAttribute="trailing" constant="16" id="pJ8-6d-Alb"/>
+                                    <constraint firstItem="YdC-7u-gLA" firstAttribute="centerX" secondItem="aRu-cD-nCu" secondAttribute="centerX" id="tFi-Pj-Jl6"/>
                                     <constraint firstAttribute="height" constant="64" id="xdA-ji-Rla"/>
                                 </constraints>
                             </view>
@@ -63,6 +68,7 @@
                     <connections>
                         <outlet property="catTableView" destination="Pyr-3u-JtK" id="09K-NU-SR7"/>
                         <outlet property="countTextField" destination="Dwm-lQ-evq" id="EAN-Fl-n3j"/>
+                        <outlet property="indicatorView" destination="YdC-7u-gLA" id="i29-7G-4bC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
