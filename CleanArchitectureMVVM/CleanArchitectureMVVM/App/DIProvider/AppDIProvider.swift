@@ -24,7 +24,6 @@ class AppDIProvider: ViewControllerFactory {
         self.catDIProvider = catDIProvider
     }
     
-    
     private let catDIProvider: CatDIProvider
     
     func makeMainViewController(catViewModel: CatViewModel? = nil) -> UIViewController {

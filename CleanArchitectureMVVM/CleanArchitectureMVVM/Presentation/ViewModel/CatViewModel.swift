@@ -14,17 +14,13 @@ protocol CatViewModelInput {
 }
 
 protocol CatViewModelOutput {
-    var cats: [CatEntity] { get }
-    var catsPublished: Published<[CatEntity]> { get }
-    var catsPublisher: Published<[CatEntity]>.Publisher { get }
+    var cats: CurrentValueSubject<[CatEntity], Never> { get }
 }
 
 protocol CatViewModel: CatViewModelInput, CatViewModelOutput { }
 
 class DefaultCatViewModel: CatViewModel {
-    @Published private(set) var cats: [CatEntity] = []
-    var catsPublished: Published<[CatEntity]> { _cats }
-    var catsPublisher: Published<[CatEntity]>.Publisher { $cats }
+    var cats: CurrentValueSubject<[CatEntity], Never> = .init([])
     
     private var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
     
@@ -38,12 +34,12 @@ class DefaultCatViewModel: CatViewModel {
         catUseCase.fetchCats(count: count)
             .manageThread()
             .sinkHandledCompletion(receiveValue: { [weak self] catEntities in
-                self?.cats.append(contentsOf: catEntities)
+                self?.cats.value.append(contentsOf: catEntities)
             })
             .store(in: &cancellable)
     }
     
     func deleteCat(index: Int) {
-        cats.remove(at: index)
+        cats.value.remove(at: index)
     }
 }

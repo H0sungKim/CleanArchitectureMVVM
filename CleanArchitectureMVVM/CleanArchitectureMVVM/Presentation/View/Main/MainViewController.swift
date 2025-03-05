@@ -19,7 +19,10 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        navigationController?.navigationBar.isHidden = true
+        catTableView.register(UINib(nibName: String(describing: CatTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: CatTableViewCell.self))
+        catTableView.delegate = self
+        catTableView.dataSource = self
         bind(catViewModel: catViewModel)
     }
     
@@ -28,8 +31,9 @@ class MainViewController: UIViewController {
     }
     
     private func bind(catViewModel: CatViewModel) {
-        catViewModel.catsPublisher.sink(receiveValue: { catEntities in
-            print(catEntities)
+        catViewModel.cats.sink(receiveValue: {[weak self] catEntities in
+            self?.catTableView.reloadData()
+            
         })
         .store(in: &cancellable)
     }
@@ -37,6 +41,24 @@ class MainViewController: UIViewController {
     @IBAction func onClickAddCat(_ sender: Any) {
         guard let text = countTextField.text, let count = Int(text) else { return }
         catViewModel.addCat(count: count)
+    }
+}
+
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return catViewModel.cats.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: CatTableViewCell
+        if let reusableCell = tableView.dequeueReusableCell(withIdentifier: String(describing: CatTableViewCell.self), for: indexPath) as? CatTableViewCell {
+            cell = reusableCell
+        } else {
+            let objectArray = Bundle.main.loadNibNamed(String(describing: CatTableViewCell.self), owner: nil, options: nil)
+            cell = objectArray![0] as! CatTableViewCell
+        }
+        cell.configure(catEntity: catViewModel.cats.value[indexPath.row])
+        return cell
     }
 }
 
