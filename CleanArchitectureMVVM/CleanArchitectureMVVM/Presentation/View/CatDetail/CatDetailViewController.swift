@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Combine
 
 class CatDetailViewController: UIViewController {
     
@@ -14,7 +13,6 @@ class CatDetailViewController: UIViewController {
     @IBOutlet weak var catSpeciesLabel: UILabel!
     @IBOutlet weak var catFeatureLabel: UILabel!
     @IBOutlet weak var catWikipediaButton: UIButton!
-    private var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
     
     private var index: Int!
     private var catViewModel: CatViewModel!
@@ -22,7 +20,7 @@ class CatDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bind(catViewModel: catViewModel)
+        initializeView()
     }
     
     func inject(index: Int, catViewModel: CatViewModel) {
@@ -30,17 +28,22 @@ class CatDetailViewController: UIViewController {
         self.catViewModel = catViewModel
     }
     
-    private func bind(catViewModel: CatViewModel) {
-        catViewModel.cats.sink(receiveValue: { [weak self] catEntities in
-            guard let self = self else { return }
-            catImageView.kf.setImage(with: catViewModel.cats.value[index].imageUrl)
-            catSpeciesLabel.text = catViewModel.cats.value[index].species
-            catFeatureLabel.text = catViewModel.cats.value[index].features
-//            catWikipediaButton
-        })
-        .store(in: &cancellable)
+    private func initializeView() {
+        catImageView.kf.setImage(with: catViewModel.cats.value[index].imageUrl)
+        catSpeciesLabel.text = catViewModel.cats.value[index].species
+        catFeatureLabel.text = catViewModel.cats.value[index].features
+    }
+    
+    @IBAction func onClickBack(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
     @IBAction func onClickDeleteCat(_ sender: Any) {
         catViewModel.deleteCat(index: index)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func onClickWikipedia(_ sender: Any) {
+        guard let url = catViewModel.cats.value[index].wikipedia else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }

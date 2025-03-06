@@ -66,6 +66,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="aRu-cD-nCu" id="fvh-AV-cus"/>
                         <outlet property="catTableView" destination="Pyr-3u-JtK" id="09K-NU-SR7"/>
                         <outlet property="countTextField" destination="Dwm-lQ-evq" id="EAN-Fl-n3j"/>
                         <outlet property="indicatorView" destination="YdC-7u-gLA" id="i29-7G-4bC"/>

@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var catTableView: UITableView!
     @IBOutlet weak var countTextField: UITextField!
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
     private var cancellable: Set<AnyCancellable> = Set<AnyCancellable>()
@@ -20,7 +21,6 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
         configureTableView()
         bind(catViewModel: catViewModel)
     }
@@ -31,6 +31,7 @@ class MainViewController: UIViewController {
     
     private func bind(catViewModel: CatViewModel) {
         catViewModel.cats.sink(receiveValue: { [weak self] catEntities in
+            self?.addButton.isHidden = false
             self?.indicatorView.stopAnimating()
             self?.catTableView.reloadData()
         })
@@ -43,9 +44,10 @@ class MainViewController: UIViewController {
         catTableView.dataSource = self
     }
     
-    @IBAction func onClickAddCat(_ sender: Any) {
+    @IBAction func onClickAddCat(_ sender: UIButton) {
         guard let text = countTextField.text, let count = Int(text) else { return }
         countTextField.text = nil
+        sender.isHidden = true
         indicatorView.startAnimating()
         catViewModel.addCat(count: count)
     }
@@ -69,8 +71,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let catDetailViewController = AppDIProvider.shared.makeCatDetailViewController(index: indexPath.row, catViewModel: catViewModel)
         navigationController?.pushViewController(catDetailViewController, animated: true)
     }
 }
-

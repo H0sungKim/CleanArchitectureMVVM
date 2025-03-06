@@ -10,6 +10,8 @@ import Kingfisher
 
 class CatTableViewCell: UITableViewCell {
     
+    var onClickWikipedia: (() -> Void)?
+    
     @IBOutlet weak var catImageView: UIImageView!
     @IBOutlet weak var catSpeciesLabel: UILabel!
     @IBOutlet weak var catFeatureLabel: UILabel!
@@ -17,7 +19,6 @@ class CatTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         
     }
 
@@ -30,6 +31,13 @@ class CatTableViewCell: UITableViewCell {
         catImageView.kf.setImage(with: catEntity.imageUrl)
         catSpeciesLabel.text = catEntity.species
         catFeatureLabel.text = catEntity.features
-//        wikipediaButton.
+        onClickWikipedia = {
+            guard let url = catEntity.wikipedia else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    @IBAction func onClickWikipedia(_ sender: Any) {
+        onClickWikipedia?()
     }
 }
