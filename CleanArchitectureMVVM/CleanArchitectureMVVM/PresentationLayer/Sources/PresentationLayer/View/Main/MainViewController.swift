@@ -1,6 +1,6 @@
 //
 //  MainViewController.swift
-//  CleanArchitectureMVVM
+//  PresentationLayer
 //
 //  Created by 김호성 on 2025.03.03.
 //
@@ -72,7 +72,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        let catDetailViewController = AppDIProvider.shared.makeCatDetailViewController(index: indexPath.row, catViewModel: catViewModel)
-//        navigationController?.pushViewController(catDetailViewController, animated: true)
+        guard let viewControllerFactory = (navigationController as? DINavigationController)?.viewControllerFactory else { return }
+        let catDetailViewController = viewControllerFactory.makeCatDetailViewController(index: indexPath.row, catViewModel: catViewModel)
+        navigationController?.pushViewController(catDetailViewController, animated: true)
     }
 }

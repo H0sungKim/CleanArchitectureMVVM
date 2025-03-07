@@ -1,6 +1,6 @@
 //
 //  CatAPI.swift
-//  CleanArchitectureMVVM
+//  PresentationLayer
 //
 //  Created by 김호성 on 2025.03.03.
 //
@@ -37,7 +37,7 @@ extension CatAPI: TargetType {
             .requestParameters(parameters: [
                 "limit": count,
                 "has_breeds": 1,
-//                "api_key": Bundle.main.apiKey ?? ""
+                "api_key": Bundle.module.apiKey ?? ""
             ], encoding: URLEncoding.queryString)
         }
     }
