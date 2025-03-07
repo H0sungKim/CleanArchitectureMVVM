@@ -9,6 +9,6 @@ import Foundation
 import UIKit
 
 public protocol ViewControllerFactory {
-    func makeMainViewController(catViewModel: CatViewModel?) -> MainViewController
-    func makeCatDetailViewController(index: Int, catViewModel: CatViewModel?) -> CatDetailViewController
+    func createMainViewController(catViewModel: CatViewModel?) -> MainViewController
+    func createCatDetailViewController(index: Int, catViewModel: CatViewModel?) -> CatDetailViewController
 }

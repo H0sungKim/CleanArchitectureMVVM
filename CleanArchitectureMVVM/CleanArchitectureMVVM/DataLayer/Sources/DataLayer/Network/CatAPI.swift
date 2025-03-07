@@ -34,7 +34,7 @@ extension CatAPI: TargetType {
     var task: Moya.Task {
         switch self {
         case .fetchCats(let count):
-            .requestParameters(parameters: [
+            return .requestParameters(parameters: [
                 "limit": count,
                 "has_breeds": 1,
                 "api_key": Bundle.module.apiKey ?? ""

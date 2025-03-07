@@ -22,14 +22,14 @@ class AppDIProvider: ViewControllerFactory {
     
     private let catDIProvider: CatDIProvider
     
-    func makeMainViewController(catViewModel: CatViewModel? = nil) -> MainViewController {
-        let viewController: MainViewController = MainViewController.initialize()
+    func createMainViewController(catViewModel: CatViewModel? = nil) -> MainViewController {
+        let viewController: MainViewController = MainViewController.create()
         viewController.inject(catViewModel: catViewModel ?? catDIProvider.makeCatViewModel())
         return viewController
     }
     
-    func makeCatDetailViewController(index: Int, catViewModel: CatViewModel? = nil) -> CatDetailViewController {
-        let viewController: CatDetailViewController = CatDetailViewController.initialize()
+    func createCatDetailViewController(index: Int, catViewModel: CatViewModel? = nil) -> CatDetailViewController {
+        let viewController: CatDetailViewController = CatDetailViewController.create()
         viewController.inject(index: index, catViewModel: catViewModel ?? catDIProvider.makeCatViewModel())
         return viewController
     }
