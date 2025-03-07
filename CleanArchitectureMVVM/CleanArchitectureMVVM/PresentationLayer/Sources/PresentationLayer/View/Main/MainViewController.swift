@@ -23,6 +23,41 @@ public class MainViewController: UIViewController {
         super.viewDidLoad()
         configureTableView()
         bind(catViewModel: catViewModel)
+        hideKeyboardWhenTappedAround()
+    }
+    
+    public override func viewDidAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification: )), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification: )), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    public override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo, let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            self?.view.frame.origin.y = -keyboardFrame.height
+            self?.view.layoutIfNeeded()
+        }
+    }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            self?.view.frame.origin.y = 0
+            self?.view.layoutIfNeeded()
+        }
+    }
+    
+    private func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     public func inject(catViewModel: CatViewModel) {

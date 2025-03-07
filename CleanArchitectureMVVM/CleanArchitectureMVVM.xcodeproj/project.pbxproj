@@ -7,12 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		96CC28A42D79E9FE00127579 /* DataLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 96CC28A32D79E9FE00127579 /* DataLayer */; };
-		96CC28A62D79E9FE00127579 /* DomainLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 96CC28A52D79E9FE00127579 /* DomainLayer */; };
-		96CC28A82D79E9FE00127579 /* PresentationLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 96CC28A72D79E9FE00127579 /* PresentationLayer */; };
-		96E4B5662D75B5B200619FE8 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 96E4B5652D75B5B200619FE8 /* CombineMoya */; };
-		96E4B5682D75B5B200619FE8 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 96E4B5672D75B5B200619FE8 /* Moya */; };
-		96E4B7F22D787DAD00619FE8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 96E4B7F12D787DAD00619FE8 /* Kingfisher */; };
+		96D22A2E2D7B156E0020FD05 /* PresentationLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 96D22A2D2D7B156E0020FD05 /* PresentationLayer */; };
+		96D22A302D7B161F0020FD05 /* DataLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 96D22A2F2D7B161F0020FD05 /* DataLayer */; };
+		96D22A322D7B161F0020FD05 /* DomainLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 96D22A312D7B161F0020FD05 /* DomainLayer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,12 +74,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96CC28A42D79E9FE00127579 /* DataLayer in Frameworks */,
-				96E4B7F22D787DAD00619FE8 /* Kingfisher in Frameworks */,
-				96E4B5682D75B5B200619FE8 /* Moya in Frameworks */,
-				96CC28A62D79E9FE00127579 /* DomainLayer in Frameworks */,
-				96CC28A82D79E9FE00127579 /* PresentationLayer in Frameworks */,
-				96E4B5662D75B5B200619FE8 /* CombineMoya in Frameworks */,
+				96D22A302D7B161F0020FD05 /* DataLayer in Frameworks */,
+				96D22A2E2D7B156E0020FD05 /* PresentationLayer in Frameworks */,
+				96D22A322D7B161F0020FD05 /* DomainLayer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,12 +145,9 @@
 			);
 			name = CleanArchitectureMVVM;
 			packageProductDependencies = (
-				96E4B5652D75B5B200619FE8 /* CombineMoya */,
-				96E4B5672D75B5B200619FE8 /* Moya */,
-				96E4B7F12D787DAD00619FE8 /* Kingfisher */,
-				96CC28A32D79E9FE00127579 /* DataLayer */,
-				96CC28A52D79E9FE00127579 /* DomainLayer */,
-				96CC28A72D79E9FE00127579 /* PresentationLayer */,
+				96D22A2D2D7B156E0020FD05 /* PresentationLayer */,
+				96D22A2F2D7B161F0020FD05 /* DataLayer */,
+				96D22A312D7B161F0020FD05 /* DomainLayer */,
 			);
 			productName = CleanArchitectureMVVM;
 			productReference = 96E4B52F2D75B3B300619FE8 /* CleanArchitectureMVVM.app */;
@@ -241,8 +232,6 @@
 			mainGroup = 96E4B5262D75B3B300619FE8;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				96E4B5642D75B5B200619FE8 /* XCRemoteSwiftPackageReference "Moya" */,
-				96E4B7F02D787DAD00619FE8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 96E4B5302D75B3B300619FE8 /* Products */;
@@ -606,52 +595,18 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		96E4B5642D75B5B200619FE8 /* XCRemoteSwiftPackageReference "Moya" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Moya/Moya/";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 15.0.3;
-			};
-		};
-		96E4B7F02D787DAD00619FE8 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.3.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		96CC28A32D79E9FE00127579 /* DataLayer */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DataLayer;
-		};
-		96CC28A52D79E9FE00127579 /* DomainLayer */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DomainLayer;
-		};
-		96CC28A72D79E9FE00127579 /* PresentationLayer */ = {
+		96D22A2D2D7B156E0020FD05 /* PresentationLayer */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PresentationLayer;
 		};
-		96E4B5652D75B5B200619FE8 /* CombineMoya */ = {
+		96D22A2F2D7B161F0020FD05 /* DataLayer */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 96E4B5642D75B5B200619FE8 /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = CombineMoya;
+			productName = DataLayer;
 		};
-		96E4B5672D75B5B200619FE8 /* Moya */ = {
+		96D22A312D7B161F0020FD05 /* DomainLayer */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 96E4B5642D75B5B200619FE8 /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = Moya;
-		};
-		96E4B7F12D787DAD00619FE8 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 96E4B7F02D787DAD00619FE8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
+			productName = DomainLayer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
