@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96CC28A42D79E9FE00127579 /* DataLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 96CC28A32D79E9FE00127579 /* DataLayer */; };
+		96CC28A62D79E9FE00127579 /* DomainLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 96CC28A52D79E9FE00127579 /* DomainLayer */; };
+		96CC28A82D79E9FE00127579 /* PresentationLayer in Frameworks */ = {isa = PBXBuildFile; productRef = 96CC28A72D79E9FE00127579 /* PresentationLayer */; };
 		96E4B5662D75B5B200619FE8 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 96E4B5652D75B5B200619FE8 /* CombineMoya */; };
 		96E4B5682D75B5B200619FE8 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 96E4B5672D75B5B200619FE8 /* Moya */; };
 		96E4B7F22D787DAD00619FE8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 96E4B7F12D787DAD00619FE8 /* Kingfisher */; };
@@ -39,7 +42,10 @@
 		96E4B5572D75B3B500619FE8 /* Exceptions for "CleanArchitectureMVVM" folder in "CleanArchitectureMVVM" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				DataLayer,
+				DomainLayer,
 				Info.plist,
+				PresentationLayer,
 			);
 			target = 96E4B52E2D75B3B300619FE8 /* CleanArchitectureMVVM */;
 		};
@@ -71,8 +77,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96CC28A42D79E9FE00127579 /* DataLayer in Frameworks */,
 				96E4B7F22D787DAD00619FE8 /* Kingfisher in Frameworks */,
 				96E4B5682D75B5B200619FE8 /* Moya in Frameworks */,
+				96CC28A62D79E9FE00127579 /* DomainLayer in Frameworks */,
+				96CC28A82D79E9FE00127579 /* PresentationLayer in Frameworks */,
 				96E4B5662D75B5B200619FE8 /* CombineMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,12 +103,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		96CC28A22D79E9FE00127579 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		96E4B5262D75B3B300619FE8 = {
 			isa = PBXGroup;
 			children = (
 				96E4B5312D75B3B300619FE8 /* CleanArchitectureMVVM */,
 				96E4B5482D75B3B500619FE8 /* CleanArchitectureMVVMTests */,
 				96E4B5522D75B3B500619FE8 /* CleanArchitectureMVVMUITests */,
+				96CC28A22D79E9FE00127579 /* Frameworks */,
 				96E4B5302D75B3B300619FE8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -137,6 +154,9 @@
 				96E4B5652D75B5B200619FE8 /* CombineMoya */,
 				96E4B5672D75B5B200619FE8 /* Moya */,
 				96E4B7F12D787DAD00619FE8 /* Kingfisher */,
+				96CC28A32D79E9FE00127579 /* DataLayer */,
+				96CC28A52D79E9FE00127579 /* DomainLayer */,
+				96CC28A72D79E9FE00127579 /* PresentationLayer */,
 			);
 			productName = CleanArchitectureMVVM;
 			productReference = 96E4B52F2D75B3B300619FE8 /* CleanArchitectureMVVM.app */;
@@ -606,6 +626,18 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		96CC28A32D79E9FE00127579 /* DataLayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DataLayer;
+		};
+		96CC28A52D79E9FE00127579 /* DomainLayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DomainLayer;
+		};
+		96CC28A72D79E9FE00127579 /* PresentationLayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PresentationLayer;
+		};
 		96E4B5652D75B5B200619FE8 /* CombineMoya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 96E4B5642D75B5B200619FE8 /* XCRemoteSwiftPackageReference "Moya" */;
