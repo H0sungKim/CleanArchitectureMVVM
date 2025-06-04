@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CatEntity {
+public struct CatEntity: Entity, Hashable, Sendable {
     public let imageUrl: URL?
     public let size: CGSize
     public let species: String

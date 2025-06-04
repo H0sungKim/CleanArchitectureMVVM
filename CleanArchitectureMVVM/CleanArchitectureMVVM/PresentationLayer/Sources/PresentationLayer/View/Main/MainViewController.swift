@@ -5,6 +5,8 @@
 //  Created by 김호성 on 2025.03.03.
 //
 
+import DomainLayer
+
 import UIKit
 import Combine
 
@@ -15,6 +17,8 @@ public class MainViewController: UIViewController {
     @IBOutlet weak var countTextField: UITextField!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
+    
+    private var dataSource: UITableViewDiffableDataSource<Section, Item>!
     
     // MARK: - ViewModel
     private var catViewModel: CatViewModel!
@@ -49,6 +53,10 @@ public class MainViewController: UIViewController {
             self?.addButton.isHidden = false
             self?.indicatorView.stopAnimating()
             self?.catTableView.reloadData()
+            var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(catEntities.map({ Item.main(cat: $0) }), toSection: .main)
+            self?.dataSource.apply(snapshot, animatingDifferences: true)
         })
         .store(in: &cancellable)
     }
@@ -82,7 +90,15 @@ public class MainViewController: UIViewController {
     private func configureTableView() {
         catTableView.register(UINib(nibName: String(describing: CatTableViewCell.self), bundle: Bundle.module), forCellReuseIdentifier: String(describing: CatTableViewCell.self))
         catTableView.delegate = self
-        catTableView.dataSource = self
+        dataSource = UITableViewDiffableDataSource<Section, Item>(tableView: catTableView, cellProvider: { tableView, indexPath, itemIdentifier in
+            let cell: CatTableViewCell = CatTableViewCell.create(tableView: tableView, indexPath: indexPath)
+            switch itemIdentifier {
+            case .main(let catEntity):
+                cell.configure(catEntity: catEntity)
+            }
+            return cell
+        })
+        catTableView.dataSource = dataSource
     }
     
     // MARK: - IBAction
@@ -96,22 +112,31 @@ public class MainViewController: UIViewController {
 }
 
 // MARK: - Delegate
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+extension MainViewController: UITableViewDelegate {
+    
+    private enum Section {
+        case main
+    }
+    
+    private enum Item: Hashable, Sendable {
+        case main(cat: CatEntity)
+    }
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return catViewModel.cats.value.count
     }
     
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: CatTableViewCell
-        if let reusableCell = tableView.dequeueReusableCell(withIdentifier: String(describing: CatTableViewCell.self), for: indexPath) as? CatTableViewCell {
-            cell = reusableCell
-        } else {
-            let objectArray = Bundle.main.loadNibNamed(String(describing: CatTableViewCell.self), owner: nil, options: nil)
-            cell = objectArray![0] as! CatTableViewCell
-        }
-        cell.configure(catEntity: catViewModel.cats.value[indexPath.row])
-        return cell
-    }
+//    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell: CatTableViewCell
+//        if let reusableCell = tableView.dequeueReusableCell(withIdentifier: String(describing: CatTableViewCell.self), for: indexPath) as? CatTableViewCell {
+//            cell = reusableCell
+//        } else {
+//            let objectArray = Bundle.main.loadNibNamed(String(describing: CatTableViewCell.self), owner: nil, options: nil)
+//            cell = objectArray![0] as! CatTableViewCell
+//        }
+//        cell.configure(catEntity: catViewModel.cats.value[indexPath.row])
+//        return cell
+//    }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
