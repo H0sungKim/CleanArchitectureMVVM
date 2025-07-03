@@ -122,22 +122,6 @@ extension MainViewController: UITableViewDelegate {
         case main(cat: CatEntity)
     }
     
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return catViewModel.cats.value.count
-    }
-    
-//    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell: CatTableViewCell
-//        if let reusableCell = tableView.dequeueReusableCell(withIdentifier: String(describing: CatTableViewCell.self), for: indexPath) as? CatTableViewCell {
-//            cell = reusableCell
-//        } else {
-//            let objectArray = Bundle.main.loadNibNamed(String(describing: CatTableViewCell.self), owner: nil, options: nil)
-//            cell = objectArray![0] as! CatTableViewCell
-//        }
-//        cell.configure(catEntity: catViewModel.cats.value[indexPath.row])
-//        return cell
-//    }
-    
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let viewControllerFactory = (navigationController as? DINavigationController)?.viewControllerFactory else { return }
