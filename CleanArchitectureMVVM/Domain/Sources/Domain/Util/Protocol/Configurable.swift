@@ -1,6 +1,6 @@
 //
 //  Configurable.swift
-//  Core
+//  Domain
 //
 //  Created by 김호성 on 2025.11.18.
 //

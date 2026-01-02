@@ -1,6 +1,6 @@
 //
 //  CatFactory.swift
-//  CleanArchitectureMVI
+//  CleanArchitectureMVVM
 //
 //  Created by 김호성 on 2025.12.05.
 //
